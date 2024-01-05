@@ -1,0 +1,40 @@
+{
+	"format_version": 2,
+	"header": {
+		"description": "This is the behavior pack for Bendy and the Ink Machine, In Minecraft!",
+		"name": "Bendy and the Ink Machine, In Minecraft! Behavior Pack",
+		"uuid": "25f9f9e8-9bf4-43c6-884e-cd16ef124c3f",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 20, 30]
+	},
+	"modules": [
+		{
+			"uuid": "68d0396e-2f22-4b0e-9c34-4ef2587356af",
+			"version": [1, 0, 0],
+			"type": "script",
+			"language": "javascript",
+			"entry": "scripts/Main.js"
+		},
+		{
+			"description": "This is the data module for Bendy and the Ink Machine, In Minecraft!",
+			"type": "data",
+			"uuid": "92c638f7-5b0d-4548-9f77-3175ab218f37",
+			"version": [1, 0, 0]
+		}
+	],
+	"capabilities": ["script_eval"],
+	"dependencies": [
+		{
+			"uuid": "3851722e-f669-4075-9ac0-f3d106b95c68",
+			"version": [1, 0, 0]
+		},
+		{
+			"module_name": "@minecraft/server",
+			"version": "1.5.0"
+		},
+		{
+			"module_name": "@minecraft/server-ui",
+			"version": "1.1.0"
+		}
+	]
+}

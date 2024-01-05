@@ -1,0 +1,118 @@
+{
+	"format_version": "1.20.30",
+	"minecraft:block": {
+		"description": {
+			"identifier": "batim:cassette_player",
+			"menu_category": {
+				"category": "construction"
+			},
+			"traits": {
+				"minecraft:placement_direction": {
+					"enabled_states": ["minecraft:cardinal_direction"]
+				}
+			},
+			"states": {
+				"batim:audiolog": ["ch1_wally", "ch1_thomas"],
+				"batim:is_playing": [false, true]
+			}
+		},
+		"components": {
+			"minecraft:light_dampening": 0,
+			"minecraft:collision_box": {
+				"origin": [-5, 0, -7],
+				"size": [10, 2, 15]
+			},
+			"minecraft:selection_box": {
+				"origin": [-5, 0, -7],
+				"size": [10, 2, 15]
+			},
+			"minecraft:destructible_by_mining": false,
+			"minecraft:destructible_by_explosion": false,
+			"minecraft:geometry": "geometry.cassette_player",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "cassette_player",
+					"render_method": "double_sided"
+				}
+			},
+			"minecraft:map_color": "#ffffff",
+			"minecraft:on_interact": {
+				"event": "batim:play_audiolog"
+			}
+		},
+		"events": {
+			"batim:play_audiolog": {
+				"sequence": [
+					{
+						"condition": "q.block_state('batim:audiolog') == 'ch1_wally' && !q.block_state('batim:is_playing')",
+						"run_command": {
+							"target": "self",
+							"command": [
+								"playsound audiolog.ch1_wally @a ~ ~ ~",
+								"playsound cassette_player.on @a ~ ~ ~",
+								"scriptevent batim:cassette_player.play ch1_wally"
+							]
+						}
+					},
+					{
+						"condition": "q.block_state('batim:audiolog') == 'ch1_wally' && !q.block_state('batim:is_playing')",
+						"set_block_state": {
+							"batim:is_playing": true					
+						}
+					},
+					{
+						"condition": "q.block_state('batim:audiolog') == 'ch1_thomas' && !q.block_state('batim:is_playing')",
+						"run_command": {
+							"target": "self",
+							"command": [
+								"playsound audiolog.ch1_thomas @a ~ ~ ~",
+								"playsound cassette_player.on @a ~ ~ ~",
+								"scriptevent batim:cassette_player.play ch1_thomas"
+							]
+						}
+					},
+					{
+						"condition": "q.block_state('batim:audiolog') == 'ch1_thomas' && !q.block_state('batim:is_playing')",
+						"set_block_state": {
+							"batim:is_playing": true					
+						}
+					}
+				]
+			}
+		},
+		"permutations": [
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [0, 180, 0]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [0, 0, 0]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [0, 90, 0]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [0, 270, 0]
+					}
+				}
+			}
+		]
+	}
+}

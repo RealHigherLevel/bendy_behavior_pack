@@ -1,0 +1,125 @@
+{
+	"format_version": "1.20.30",
+	"minecraft:block": {
+		"description": {
+			"identifier": "batim:radio",
+			"menu_category": {
+				"category": "construction"
+			},
+			"traits": {
+				"minecraft:placement_direction": {
+					"enabled_states": ["minecraft:cardinal_direction"]
+				}
+			},
+			"states": {
+				"batim:radio": ["ch1", "ch2", "ch3", "ch4", "ch5"],
+				"batim:can_play": [true, false]
+			}
+		},
+		"components": {
+			"minecraft:light_dampening": 0,
+			"minecraft:collision_box": {
+				"origin": [-7, 0, -4],
+				"size": [14, 15, 9]
+			},
+			"minecraft:selection_box": {
+				"origin": [-7, 0, -4],
+				"size": [14, 15, 9]
+			},
+			"minecraft:destructible_by_mining": false,
+			"minecraft:destructible_by_explosion": false,
+			"minecraft:map_color": "#ffffff",
+			"minecraft:geometry": "geometry.radio",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "radio",
+					"render_method": "alpha_test"
+				}
+			},
+			"minecraft:on_interact": {
+				"event": "batim:play_radio"
+			}
+		},
+		"events": {
+			"batim:play_radio": {
+				"sequence": [
+					{
+						"condition": "q.block_state('batim:radio') == 'ch1' && q.block_state('batim:can_play')",
+						"run_command": {
+							"target": "self",
+							"command": "playsound radio.ch1 @a ~ ~ ~"
+						}
+					},
+					{
+						"condition": "q.block_state('batim:radio') == 'ch2' && q.block_state('batim:can_play')",
+						"run_command": {
+							"target": "self",
+							"command": "playsound radio.ch2 @a ~ ~ ~"
+						}
+					},
+					{
+						"condition": "q.block_state('batim:radio') == 'ch3' && q.block_state('batim:can_play')",
+						"run_command": {
+							"target": "self",
+							"command": "playsound radio.ch3 @a ~ ~ ~"
+						}
+					},
+					{
+						"condition": "q.block_state('batim:radio') == 'ch4' && q.block_state('batim:can_play')",
+						"run_command": {
+							"target": "self",
+							"command": "playsound radio.ch4 @a ~ ~ ~"
+						}
+					},
+					{
+						"condition": "q.block_state('batim:radio') == 'ch5' && q.block_state('batim:can_play')",
+						"run_command": {
+							"target": "self",
+							"command": "playsound radio.ch5 @a ~ ~ ~"
+						}
+					},
+					{
+						"condition": "q.block_state('batim:can_play')",
+						"set_block_state": {
+							"batim:can_play": false
+						}
+					}
+				]
+			}
+		},
+		"permutations": [
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [0, 180, 0]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [0, 0, 0]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [0, 90, 0]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [0, 270, 0]
+					}
+				}
+			}
+		]
+	}
+}
